@@ -1,4 +1,4 @@
 handlebars-demo
 ===============
 
-The basic demo for JavaScript Templating - HandleBars JS
+Step-by-step walk-thru of HandleBars JS (JavaScript Templating)
