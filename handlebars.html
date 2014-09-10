@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='UTF-8'>
+	<title>HandleBar Demo</title>	
+	<link rel="stylesheet" href="https://developers.google.com/web/css/styles.min.css" >
+</head>
+<body>
+<h1>Basic HandleBar Demo</h1>
+
+<ul id="a1"><!-- Step 1: Define the template-->
+	<script id="detail" type="text/x-handlebars-template">
+	{{#each this}}
+		<li>Name : {{fullName name}}</li>
+		{{#if age}}<li>Age: {{{age}}}</li>{{/if}}
+		<li>Country is: {{country}}</li>
+		<!-- Condition based display -->
+		{{#if quote}} <p><b>Quote:</b>{{quote}}</p> {{else}}<p>This person is not literate enough to 'Quote' something!!</p> {{/if}}
+		<hr/>
+	{{/each}}
+	</script>
+</ul>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars-v2.0.0.js"></script>
+<script>
+$(function(){
+	//Step 2: Define the data
+	var data = [
+		{
+			name: {first:"Siraj", last:"Khan"}, 
+			country:"India",
+			age: 27,
+			quote: "The rung of a ladder was never meant to rest upon, but only hold a man's foot long enough to enable him to put the other somewhat higher!!!"
+		},
+		{
+			name: {first:"Little", last:"kid"},  
+			country:"China",
+			age: 5
+		},
+	];
+	Handlebars.registerHelper('fullName',function(author){
+		return author.first +' '+ author.last;
+	});
+	
+	//Step 3: Compile the <script> template with HandleBars -- returns func
+	tpl = Handlebars.compile($("#detail").html());
+	
+	//Step 4: Pass the data into the func -- returns the final HTML
+	finalHTML = tpl (data);
+	
+	//Step 5: add the final HTML to desired tag
+	$("#a1").append(finalHTML);
+	//$( ".container" ).append( $( "h2" ) );
+	
+});
+</script>
+</body>
+</html>
